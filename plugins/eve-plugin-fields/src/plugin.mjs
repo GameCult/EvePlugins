@@ -62,6 +62,7 @@ export function measure(input) {
   const projection = project(input);
   return {
     measurementKind: "field-domain-metrics",
+    measurementOutputs: ["width", "height", "channelCount"],
     width: projection.bounds.maxX - projection.bounds.minX,
     height: projection.bounds.maxY - projection.bounds.minY,
     channelCount: projection.channels.length,

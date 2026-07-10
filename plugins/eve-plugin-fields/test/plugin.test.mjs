@@ -38,6 +38,7 @@ test("measures field domains without mutating provider state", () => {
   assert.equal(result.width, 20);
   assert.equal(result.height, 10);
   assert.equal(result.channelCount, 1);
+  assert.deepEqual(result.measurementOutputs, ["width", "height", "channelCount"]);
   assert.equal(result.preservesProviderAuthority, true);
 });
 

@@ -8,9 +8,9 @@
   "responseSchema": "gamecult.eve.plugin_abi.response.v1",
   "authority": "EvePlugins owns field semantics; providers own sampled field state and runtimes own native projection.",
   "operations": [
-    { "operation": "describe", "input": {}, "expect": { "pluginId": "fields.surface", "componentKinds": ["field.surface2d", "gravity.surface"], "commands": [] } },
-    { "operation": "validate", "input": { "componentKinds": ["field.surface2d", "world.scene3d"], "document": { "schema": "gamecult.fields.surface2d.v1", "bounds": { "minX": -1, "minY": -1, "maxX": 1, "maxY": 1 } } }, "expect": { "acceptedComponentKinds": ["field.surface2d"], "rejectedComponentKinds": ["world.scene3d"], "validDocument": true } },
+    { "operation": "describe", "input": {}, "expect": { "pluginId": "fields.surface", "componentKinds": ["field.surface2d", "gravity.surface"], "commands": [], "capabilities": ["field.surface2d", "gravity.surface", "field.scalar", "field.vector", "field.objects"] } },
+    { "operation": "validate", "input": { "componentKinds": ["field.surface2d", "gravity.surface", "world.scene3d"], "document": { "schema": "gamecult.fields.surface2d.v1", "bounds": { "minX": -1, "minY": -1, "maxX": 1, "maxY": 1 } } }, "expect": { "acceptedComponentKinds": ["field.surface2d", "gravity.surface"], "rejectedComponentKinds": ["world.scene3d"], "validDocument": true } },
     { "operation": "project", "input": { "document": { "schema": "gamecult.fields.surface2d.v1", "fieldId": "fixture.field", "bounds": { "minX": -1, "minY": -1, "maxX": 1, "maxY": 1 }, "channels": [{ "channelId": "height", "kind": "scalar", "documentId": "cultmesh://fixture/height", "schemaId": "gamecult.fields.scalar.v1" }] } }, "expect": { "projectionKind": "semantic-field-surface", "ownedComponentKinds": ["field.surface2d", "gravity.surface"], "providerStateMutated": false } },
-    { "operation": "measure", "input": { "document": { "schema": "gamecult.fields.surface2d.v1", "fieldId": "fixture.field", "bounds": { "minX": -1, "minY": -2, "maxX": 3, "maxY": 2 }, "channels": [] } }, "expect": { "measurementKind": "field-domain-metrics", "width": 4, "height": 4, "preservesProviderAuthority": true } }
+    { "operation": "measure", "input": { "document": { "schema": "gamecult.fields.surface2d.v1", "fieldId": "fixture.field", "bounds": { "minX": -1, "minY": -2, "maxX": 3, "maxY": 2 }, "channels": [] } }, "expect": { "measurementKind": "field-domain-metrics", "measurementOutputs": ["width", "height", "channelCount"], "width": 4, "height": 4, "preservesProviderAuthority": true } }
   ]
 }
