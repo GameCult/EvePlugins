@@ -7,5 +7,9 @@
   "scripts": {
     "test": "C:\\Progra~1\\nodejs\\node.exe --test plugins/*/test/*.test.mjs",
     "witness:tex": "C:\\Progra~1\\nodejs\\node.exe scripts/run-tex-witness.mjs"
+  },
+  "dependencies": {
+    "@msgpack/msgpack": "^3.1.3",
+    "cultnet-ts": "file:../CultLib/packages/cultnet-ts"
   }
 }
