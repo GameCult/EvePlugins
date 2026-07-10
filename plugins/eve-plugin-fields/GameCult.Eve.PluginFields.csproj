@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <Description>Runtime-neutral C# contracts for gamecult.fields documents.</Description>
+    <PackageId>GameCult.Eve.PluginFields</PackageId>
+    <Version>0.1.1</Version>
+  </PropertyGroup>
+</Project>
