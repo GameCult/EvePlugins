@@ -1,0 +1,7 @@
+{
+  "name": "GameCult.Eve.PluginFields",
+  "rootNamespace": "GameCult.Eve.PluginFields",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}

@@ -29,6 +29,13 @@
     }
   },
   "stateSchemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.gravity.v1", "gamecult.fields.splats.v1", "gamecult.fields.objects.v1"],
+  "contractPackages": [
+    {
+      "runtime": "unity-csharp",
+      "package": "org.gamecult.eve.plugin-fields",
+      "path": "plugins/eve-plugin-fields/unity/org.gamecult.eve.plugin-fields"
+    }
+  ],
   "fixtures": [
     { "fixtureId": "fields-surface-basic", "schema": "gamecult.fields.surface2d.v1", "path": "plugins/eve-plugin-fields/fixtures/basic-field.json" }
   ],

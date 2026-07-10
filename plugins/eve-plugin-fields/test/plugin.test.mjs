@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { dispatch } from "../src/plugin.mjs";
 
 function request(operation, input = {}) {
@@ -38,4 +39,14 @@ test("measures field domains without mutating provider state", () => {
   assert.equal(result.height, 10);
   assert.equal(result.channelCount, 1);
   assert.equal(result.preservesProviderAuthority, true);
+});
+
+test("publishes a runtime-neutral Unity contract package", () => {
+  const packageRoot = new URL("../unity/org.gamecult.eve.plugin-fields/", import.meta.url);
+  const manifest = JSON.parse(readFileSync(new URL("package.json", packageRoot), "utf8"));
+  const contracts = readFileSync(new URL("Runtime/EveFieldsContracts.cs", packageRoot), "utf8");
+  assert.equal(manifest.name, "org.gamecult.eve.plugin-fields");
+  assert.match(contracts, /interface IEveFieldsSplatsDocument/);
+  assert.match(contracts, /gamecult\.fields\.splats\.v1/);
+  assert.doesNotMatch(contracts, /UnityEngine|Aetheria|MessagePack|GameCult\.Caching/);
 });
