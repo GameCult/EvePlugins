@@ -21,7 +21,7 @@
       "stateAuthority": "projects-provider-owned-field-documents-without-mutating-them"
     }
   },
-  "schemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.objects.v1"],
+  "schemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.gravity.v1", "gamecult.fields.splats.v1", "gamecult.fields.objects.v1"],
   "componentKinds": ["field.surface2d", "gravity.surface"],
   "commands": [],
   "fixtures": ["fields-surface-basic"]

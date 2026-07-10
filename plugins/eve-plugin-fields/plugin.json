@@ -28,7 +28,7 @@
       "stateAuthority": "projects-provider-owned-field-documents-without-mutating-them"
     }
   },
-  "stateSchemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.objects.v1"],
+  "stateSchemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.gravity.v1", "gamecult.fields.splats.v1", "gamecult.fields.objects.v1"],
   "fixtures": [
     { "fixtureId": "fields-surface-basic", "schema": "gamecult.fields.surface2d.v1", "path": "plugins/eve-plugin-fields/fixtures/basic-field.json" }
   ],
