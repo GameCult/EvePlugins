@@ -1,0 +1,40 @@
+{
+  "schema": "gamecult.eve.plugin.v1",
+  "pluginId": "tex.math",
+  "title": "TeX Math",
+  "owner": "EvePlugins",
+  "incubation": {
+    "ownerRepo": "EvePlugins",
+    "currentHostRepo": "EvePlugins",
+    "splitTarget": "EvePlugins/eve-plugin-tex",
+    "graduationTrigger": "Graduated: EvePlugins owns the executable TeX sidecar, fixtures, tests, and conformance witness."
+  },
+  "componentKinds": ["embed.tex"],
+  "commands": [],
+  "runtime": {
+    "invocationModel": "executable-sidecar",
+    "contract": "gamecult.eve.plugin_abi.v1",
+    "transports": ["stdio"],
+    "authority": ["renderer-independent", "no-provider-state-mutation", "provider-accepts-or-denies-commands"],
+    "sidecar": {
+      "processKind": "long-running-daemon",
+      "protocol": "stdio-ndjson",
+      "requestSchema": "gamecult.eve.plugin_abi.request.v1",
+      "responseSchema": "gamecult.eve.plugin_abi.response.v1",
+      "operations": ["describe", "validate", "project", "lower", "measure", "apply"],
+      "commandEnvelope": "gamecult.eve.command_invocation.v1",
+      "receiptSchema": "gamecult.eve.plugin_receipt.v1",
+      "stateAuthority": "emits-render-results-only-provider-owns-source-state"
+    }
+  },
+  "stateSchemas": ["tex.math.source.v1", "tex.math.render_request.v1", "tex.math.render_result.v1"],
+  "fixtures": [
+    { "fixtureId": "tex-math-basic", "schema": "tex.math.source.v1", "path": "plugins/eve-plugin-tex/fixtures/basic-source.json" }
+  ],
+  "abiFixtures": ["plugins/eve-plugin-tex/plugin-abi-fixture.json"],
+  "capabilities": {
+    "requires": ["embed.tex"],
+    "optionalCapabilities": ["tex.inline", "tex.block", "tex.scene-placement"]
+  }
+}
+

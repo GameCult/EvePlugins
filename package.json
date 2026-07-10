@@ -1,0 +1,11 @@
+{
+  "name": "@gamecult/eve-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MPL-2.0",
+  "workspaces": ["plugins/*"],
+  "scripts": {
+    "test": "C:\\Progra~1\\nodejs\\node.exe --test plugins/*/test/*.test.mjs",
+    "witness:tex": "C:\\Progra~1\\nodejs\\node.exe scripts/run-tex-witness.mjs"
+  }
+}

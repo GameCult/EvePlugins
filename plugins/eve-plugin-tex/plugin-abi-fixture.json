@@ -1,0 +1,18 @@
+{
+  "schema": "gamecult.eve.plugin_abi_fixture.v1",
+  "fixtureId": "tex-math-live-sidecar",
+  "pluginId": "tex.math",
+  "ownerRepo": "EvePlugins",
+  "contract": "gamecult.eve.plugin_abi.v1",
+  "requestSchema": "gamecult.eve.plugin_abi.request.v1",
+  "responseSchema": "gamecult.eve.plugin_abi.response.v1",
+  "authority": "EvePlugins owns TeX semantics; providers own source state and runtimes own projection.",
+  "operations": [
+    { "operation": "describe", "input": {}, "expect": { "pluginId": "tex.math", "componentKinds": ["embed.tex"], "commands": [], "capabilities": ["embed.tex", "tex.inline", "tex.block"] } },
+    { "operation": "validate", "input": { "componentKinds": ["embed.tex", "embed.norn"], "source": "E = mc^2" }, "expect": { "acceptedComponentKinds": ["embed.tex"], "rejectedComponentKinds": ["embed.norn"], "validSource": true, "requiredCapabilities": ["embed.tex"] } },
+    { "operation": "project", "input": { "documentId": "tex.basic", "source": "E = mc^2", "displayMode": true }, "expect": { "projectionKind": "render-request", "ownedComponentKinds": ["embed.tex"], "outputSchemas": ["tex.math.render_request.v1", "tex.math.render_result.v1"] } },
+    { "operation": "lower", "input": { "documentId": "tex.basic", "source": "E = mc^2", "displayMode": true }, "expect": { "loweringKind": "typeset-fragment", "preservedComponentKinds": ["embed.tex"], "requiredSchemas": ["tex.math.render_request.v1", "tex.math.render_result.v1"], "fallbackKind": "source-text" } },
+    { "operation": "measure", "input": { "documentId": "tex.basic", "source": "E = mc^2" }, "expect": { "measurementKind": "typeset-baseline-metrics", "measurementOutputs": ["baseline", "advance", "inkBounds", "fallbackBounds"], "preservesProviderAuthority": true } },
+    { "operation": "apply", "input": { "documentId": "tex.basic", "source": "E = mc^2", "displayMode": true }, "expect": { "stateEffects": ["cache-render-result", "emit-fallback-on-render-failure"], "receiptSchema": "gamecult.eve.plugin_receipt.v1" } }
+  ]
+}

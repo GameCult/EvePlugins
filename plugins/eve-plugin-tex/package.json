@@ -1,0 +1,14 @@
+{
+  "name": "@gamecult/eve-plugin-tex",
+  "version": "0.1.0",
+  "description": "Runtime-independent TeX semantic sidecar for Eve surfaces.",
+  "license": "MPL-2.0",
+  "type": "module",
+  "bin": {
+    "eve-plugin-tex": "./src/sidecar.mjs"
+  },
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
+}
+
