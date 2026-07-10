@@ -8,11 +8,14 @@ const root = path.resolve(import.meta.dirname, "..");
 const fixture = JSON.parse(fs.readFileSync(path.join(root, "plugins/eve-plugin-tex/plugin-abi-fixture.json"), "utf8"));
 const child = spawn(process.execPath, [path.join(root, "plugins/eve-plugin-tex/src/sidecar.mjs")], { cwd: root, stdio: ["pipe", "pipe", "inherit"] });
 const responses = readline.createInterface({ input: child.stdout })[Symbol.asyncIterator]();
+const startedAt = performance.now();
+const operationWitnesses = [];
 
 try {
   for (let index = 0; index < fixture.operations.length; index += 1) {
     const operation = fixture.operations[index];
     const requestId = `tex-witness-${index}`;
+    const operationStartedAt = performance.now();
     child.stdin.write(`${JSON.stringify({ schema: fixture.requestSchema, pluginId: fixture.pluginId, operation: operation.operation, requestId, input: operation.input })}\n`);
     const next = await responses.next();
     assert.equal(next.done, false);
@@ -23,6 +26,13 @@ try {
     assert.equal(response.requestId, requestId);
     assert.equal(response.status, "accepted");
     assertSubset(response.output, operation.expect, operation.operation);
+    operationWitnesses.push({
+      operation: operation.operation,
+      requestId,
+      status: response.status,
+      durationMs: Number((performance.now() - operationStartedAt).toFixed(3)),
+      expectationCount: Object.keys(operation.expect).length,
+    });
   }
 } finally {
   child.stdin.end();
@@ -36,9 +46,16 @@ const witness = {
   witnessId: "tex.math.owner-sidecar",
   pluginId: "tex.math",
   ownerRepo: "EvePlugins",
+  status: "pass",
   transport: "stdio-ndjson",
-  operations: fixture.operations.map(({ operation }) => operation),
-  status: "passed",
+  generatedAtUtc: new Date().toISOString(),
+  durationMs: Number((performance.now() - startedAt).toFixed(3)),
+  operations: operationWitnesses,
+  advertisementPath: "plugins/eve-plugin-tex/advertisement.json",
+  fixturePath: "plugins/eve-plugin-tex/plugin-abi-fixture.json",
+  executable: { artifact: "plugins/eve-plugin-tex/src/sidecar.mjs", command: "node" },
+  diagnostics: [],
+  authority: "plugin-sidecar-owns-tex-semantics-provider-retains-source-and-command-acceptance",
 };
 fs.writeFileSync(path.join(outputDir, "runtime-witness.json"), `${JSON.stringify(witness, null, 2)}\n`);
 console.log(path.join(outputDir, "runtime-witness.json"));
