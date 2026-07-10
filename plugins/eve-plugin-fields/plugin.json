@@ -4,10 +4,19 @@
   "title": "Semantic Fields",
   "owner": "EvePlugins",
   "incubation": {
+    "status": "graduated",
     "ownerRepo": "EvePlugins",
     "currentHostRepo": "EvePlugins",
     "splitTarget": "EvePlugins/eve-plugin-fields",
     "graduationTrigger": "Split when field schemas, sidecar witness, and two runtime adapters are stable."
+  },
+  "graduation": {
+    "status": "graduated",
+    "runtimeAdapters": ["web-reference", "unity-scene"],
+    "evidence": [
+      "artifacts/fields-surface/runtime-witness.json",
+      "EveUnity/artifacts/fields-surface/latest/unity-fields.png"
+    ]
   },
   "componentKinds": ["field.surface2d", "gravity.surface"],
   "commands": [],

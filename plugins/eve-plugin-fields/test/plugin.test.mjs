@@ -51,3 +51,9 @@ test("publishes a runtime-neutral Unity contract package", () => {
   assert.doesNotMatch(contracts, /UnityEngine|Aetheria|MessagePack|GameCult\.Caching/);
   assert.match(readFileSync(new URL("../GameCult.Eve.PluginFields.csproj", import.meta.url), "utf8"), /netstandard2\.1/);
 });
+
+test("records fields plugin graduation after two native runtime proofs", () => {
+  const manifest = JSON.parse(readFileSync(new URL("../plugin.json", import.meta.url), "utf8"));
+  assert.equal(manifest.graduation.status, "graduated");
+  assert.deepEqual(manifest.graduation.runtimeAdapters, ["web-reference", "unity-scene"]);
+});

@@ -2,7 +2,7 @@
   "schema": "gamecult.eve.plugin_advertisement.v1",
   "pluginId": "fields.surface",
   "ownerService": "eveplugins",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "manifestAddress": "file://plugins/eve-plugin-fields/plugin.json",
   "runtime": {
     "invocationModel": "executable-sidecar",
