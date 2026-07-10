@@ -1,0 +1,40 @@
+{
+  "schema": "gamecult.eve.plugin.v1",
+  "pluginId": "fields.surface",
+  "title": "Semantic Fields",
+  "owner": "EvePlugins",
+  "incubation": {
+    "ownerRepo": "EvePlugins",
+    "currentHostRepo": "EvePlugins",
+    "splitTarget": "EvePlugins/eve-plugin-fields",
+    "graduationTrigger": "Split when field schemas, sidecar witness, and two runtime adapters are stable."
+  },
+  "componentKinds": ["field.surface2d", "gravity.surface"],
+  "commands": [],
+  "runtime": {
+    "invocationModel": "executable-sidecar",
+    "contract": "gamecult.eve.plugin_abi.v1",
+    "transports": ["cultnet-rudp", "stdio"],
+    "authority": ["renderer-independent", "no-provider-state-mutation", "provider-accepts-or-denies-commands"],
+    "sidecar": {
+      "processKind": "long-running-daemon",
+      "protocol": "cultnet-operation-v0",
+      "debugProtocol": "stdio-ndjson",
+      "requestSchema": "gamecult.eve.plugin_abi.request.v1",
+      "responseSchema": "gamecult.eve.plugin_abi.response.v1",
+      "operations": ["describe", "validate", "project", "measure"],
+      "commandEnvelope": "gamecult.eve.command_invocation.v1",
+      "receiptSchema": "gamecult.eve.plugin_receipt.v1",
+      "stateAuthority": "projects-provider-owned-field-documents-without-mutating-them"
+    }
+  },
+  "stateSchemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.objects.v1"],
+  "fixtures": [
+    { "fixtureId": "fields-surface-basic", "schema": "gamecult.fields.surface2d.v1", "path": "plugins/eve-plugin-fields/fixtures/basic-field.json" }
+  ],
+  "abiFixtures": ["plugins/eve-plugin-fields/plugin-abi-fixture.json"],
+  "capabilities": {
+    "requires": ["field.surface2d"],
+    "optionalCapabilities": ["gravity.surface", "field.scalar", "field.vector", "field.objects"]
+  }
+}

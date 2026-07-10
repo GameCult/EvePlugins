@@ -8,8 +8,26 @@ import { decode, encode } from "@msgpack/msgpack";
 import { invokeCultNetOperation } from "cultnet-ts";
 
 const root = path.resolve(import.meta.dirname, "..");
-const fixture = JSON.parse(fs.readFileSync(path.join(root, "plugins/eve-plugin-tex/plugin-abi-fixture.json"), "utf8"));
-const child = spawn(process.execPath, [path.join(root, "plugins/eve-plugin-tex/src/cultnet-sidecar.mjs")], { cwd: root, stdio: ["ignore", "pipe", "inherit"] });
+const target = process.argv[2] || "tex";
+const targets = {
+  tex: {
+    directory: "eve-plugin-tex",
+    artifactDirectory: "tex-math",
+    witnessId: "tex.math.owner-sidecar",
+    authority: "plugin-sidecar-owns-tex-semantics-provider-retains-source-and-command-acceptance",
+  },
+  fields: {
+    directory: "eve-plugin-fields",
+    artifactDirectory: "fields-surface",
+    witnessId: "fields.surface.owner-sidecar",
+    authority: "plugin-sidecar-owns-field-semantics-provider-retains-field-state-and-runtime-retains-native-projection",
+  },
+};
+const config = targets[target];
+if (!config) throw new Error(`Unknown plugin witness target '${target}'.`);
+const pluginRoot = path.join(root, "plugins", config.directory);
+const fixture = JSON.parse(fs.readFileSync(path.join(pluginRoot, "plugin-abi-fixture.json"), "utf8"));
+const child = spawn(process.execPath, [path.join(pluginRoot, "src/cultnet-sidecar.mjs")], { cwd: root, stdio: ["ignore", "pipe", "inherit"] });
 const responses = readline.createInterface({ input: child.stdout })[Symbol.asyncIterator]();
 const endpointLine = await responses.next();
 assert.equal(endpointLine.done, false);
@@ -22,7 +40,7 @@ const operationWitnesses = [];
 try {
   for (let index = 0; index < fixture.operations.length; index += 1) {
     const operation = fixture.operations[index];
-    const requestId = `tex-witness-${index}`;
+    const requestId = `${target}-witness-${index}`;
     const operationStartedAt = performance.now();
     const abiRequest = { schema: fixture.requestSchema, pluginId: fixture.pluginId, operation: operation.operation, requestId, input: operation.input };
     const envelope = await invokeCultNetOperation(endpoint, {
@@ -54,23 +72,23 @@ try {
   child.kill();
 }
 
-const outputDir = path.join(root, "artifacts", "tex-math");
+const outputDir = path.join(root, "artifacts", config.artifactDirectory);
 fs.mkdirSync(outputDir, { recursive: true });
 const witness = {
   schema: "gamecult.eve.plugin_witness.v1",
-  witnessId: "tex.math.owner-sidecar",
-  pluginId: "tex.math",
+  witnessId: config.witnessId,
+  pluginId: fixture.pluginId,
   ownerRepo: "EvePlugins",
   status: "pass",
   transport: "cultnet-operation-v0+rudp",
   generatedAtUtc: new Date().toISOString(),
   durationMs: Number((performance.now() - startedAt).toFixed(3)),
   operations: operationWitnesses,
-  advertisementPath: "plugins/eve-plugin-tex/advertisement.json",
-  fixturePath: "plugins/eve-plugin-tex/plugin-abi-fixture.json",
-  executable: { artifact: "plugins/eve-plugin-tex/src/cultnet-sidecar.mjs", command: "node" },
+  advertisementPath: `plugins/${config.directory}/advertisement.json`,
+  fixturePath: `plugins/${config.directory}/plugin-abi-fixture.json`,
+  executable: { artifact: `plugins/${config.directory}/src/cultnet-sidecar.mjs`, command: "node" },
   diagnostics: [],
-  authority: "plugin-sidecar-owns-tex-semantics-provider-retains-source-and-command-acceptance",
+  authority: config.authority,
 };
 fs.writeFileSync(path.join(outputDir, "runtime-witness.json"), `${JSON.stringify(witness, null, 2)}\n`);
 console.log(path.join(outputDir, "runtime-witness.json"));

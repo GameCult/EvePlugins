@@ -1,0 +1,10 @@
+{
+  "name": "@gamecult/eve-plugin-fields",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "eve-plugin-fields": "src/sidecar.mjs",
+    "eve-plugin-fields-cultnet": "src/cultnet-sidecar.mjs"
+  }
+}

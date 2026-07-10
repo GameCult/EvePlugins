@@ -1,0 +1,28 @@
+{
+  "schema": "gamecult.eve.plugin_advertisement.v1",
+  "pluginId": "fields.surface",
+  "ownerService": "eveplugins",
+  "version": "0.1.0",
+  "manifestAddress": "file://plugins/eve-plugin-fields/plugin.json",
+  "runtime": {
+    "invocationModel": "executable-sidecar",
+    "contract": "gamecult.eve.plugin_abi.v1",
+    "transports": ["cultnet-rudp", "stdio"],
+    "authority": ["renderer-independent", "no-provider-state-mutation", "provider-accepts-or-denies-commands"],
+    "sidecar": {
+      "processKind": "long-running-daemon",
+      "protocol": "cultnet-operation-v0",
+      "debugProtocol": "stdio-ndjson",
+      "requestSchema": "gamecult.eve.plugin_abi.request.v1",
+      "responseSchema": "gamecult.eve.plugin_abi.response.v1",
+      "operations": ["describe", "validate", "project", "measure"],
+      "commandEnvelope": "gamecult.eve.command_invocation.v1",
+      "receiptSchema": "gamecult.eve.plugin_receipt.v1",
+      "stateAuthority": "projects-provider-owned-field-documents-without-mutating-them"
+    }
+  },
+  "schemas": ["gamecult.fields.surface2d.v1", "gamecult.fields.scalar.v1", "gamecult.fields.vector.v1", "gamecult.fields.objects.v1"],
+  "componentKinds": ["field.surface2d", "gravity.surface"],
+  "commands": [],
+  "fixtures": ["fields-surface-basic"]
+}

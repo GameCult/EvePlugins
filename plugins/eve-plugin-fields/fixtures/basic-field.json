@@ -1,0 +1,10 @@
+{
+  "schema": "gamecult.fields.surface2d.v1",
+  "fieldId": "fixture.field",
+  "bounds": { "minX": -10, "minY": -10, "maxX": 10, "maxY": 10 },
+  "channels": [
+    { "channelId": "height", "kind": "scalar", "documentId": "cultmesh://fixture/fields/height", "schemaId": "gamecult.fields.scalar.v1" },
+    { "channelId": "flow", "kind": "vector", "documentId": "cultmesh://fixture/fields/flow", "schemaId": "gamecult.fields.vector.v1" }
+  ],
+  "objects": { "documentId": "cultmesh://fixture/fields/objects", "schemaId": "gamecult.fields.objects.v1" }
+}
