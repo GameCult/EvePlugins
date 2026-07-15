@@ -2,6 +2,12 @@
   "name": "GameCult.Eve.PluginFields",
   "rootNamespace": "GameCult.Eve.PluginFields",
   "references": [],
+  "overrideReferences": true,
+  "precompiledReferences": [
+    "GameCult.Caching.dll",
+    "MessagePack.Annotations.dll",
+    "MessagePack.dll"
+  ],
   "autoReferenced": true,
   "noEngineReferences": true
 }

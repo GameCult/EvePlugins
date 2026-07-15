@@ -4,7 +4,13 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <Description>Runtime-neutral C# contracts for gamecult.fields documents.</Description>
+    <CultLibRoot Condition="'$(CultLibRoot)' == ''">$(MSBuildThisFileDirectory)..\..\..\CultLib</CultLibRoot>
     <PackageId>GameCult.Eve.PluginFields</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(CultLibRoot)\src\GameCult.Caching\GameCult.Caching.csproj" />
+    <PackageReference Include="MessagePack" Version="3.1.7" />
+  </ItemGroup>
 </Project>
