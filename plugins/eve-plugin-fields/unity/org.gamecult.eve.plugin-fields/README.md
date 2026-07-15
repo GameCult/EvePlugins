@@ -19,3 +19,10 @@ distance metric is `(length(frac(p) - .5) * 1.5 + .25) *
 max(abs(x) * .866 + y * .5, -y)`. `AbsoluteValue` folds a signed source after
 sampling. Constant offsets remain ordinary constant splats, so source sampling
 and additive composition retain separate ownership.
+
+`AnimatedRadialCosine` is splat-local rather than field-world anchored. It
+evaluates
+`cos(pow(distance01, FrequencyY) * FrequencyX + PhaseX + simulationTimeSeconds * AnimationSpeed)`.
+`FrequencyX` is radial frequency and `FrequencyY` is the positive radial
+exponent. The ordinary splat falloff owns the envelope, which keeps oscillation
+and compact support independently composable.

@@ -44,6 +44,7 @@ namespace GameCult.Eve.PluginFields
         public const int SimplexNoise = 1;
         public const int AnimatedSimplexNoise = 2;
         public const int AnimatedCellNoiseB = 3;
+        public const int AnimatedRadialCosine = 4;
     }
 
     public static class EveFieldsSplatSourceFlags
