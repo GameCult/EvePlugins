@@ -49,6 +49,8 @@ test("publishes a runtime-neutral Unity contract package", () => {
   assert.equal(manifest.name, "org.gamecult.eve.plugin-fields");
   assert.match(contracts, /interface IEveFieldsSplatsDocument/);
   assert.match(contracts, /gamecult\.fields\.splats\.v1/);
+  assert.match(contracts, /AnimatedCellNoiseB = 3/);
+  assert.match(contracts, /AbsoluteValue = 1/);
   assert.doesNotMatch(contracts, /UnityEngine|Aetheria|MessagePack|GameCult\.Caching/);
   assert.match(readFileSync(new URL("../GameCult.Eve.PluginFields.csproj", import.meta.url), "utf8"), /netstandard2\.1/);
 });

@@ -9,3 +9,13 @@ implement these read-only interfaces; Unity runtime adapters consume them.
 `FalloffScale` and `FalloffExponent` alongside each SoA splat. Missing parameter
 entries retain the neutral defaults `1` and `1`, so older v1 documents remain
 readable.
+
+Procedural sources are evaluated in field-world coordinates, not splat-local
+UVs. `SimplexNoise` samples signed Ashima 3D simplex at
+`(worldXY * frequency + phase, 0)`. `AnimatedSimplexNoise` uses
+`simulationTimeSeconds * animationSpeed` for the third coordinate.
+`AnimatedCellNoiseB` is the portable moving, wrappable cellular source whose
+distance metric is `(length(frac(p) - .5) * 1.5 + .25) *
+max(abs(x) * .866 + y * .5, -y)`. `AbsoluteValue` folds a signed source after
+sampling. Constant offsets remain ordinary constant splats, so source sampling
+and additive composition retain separate ownership.

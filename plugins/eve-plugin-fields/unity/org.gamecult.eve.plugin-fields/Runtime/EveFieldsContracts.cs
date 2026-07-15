@@ -43,6 +43,12 @@ namespace GameCult.Eve.PluginFields
         public const int Constant = 0;
         public const int SimplexNoise = 1;
         public const int AnimatedSimplexNoise = 2;
+        public const int AnimatedCellNoiseB = 3;
+    }
+
+    public static class EveFieldsSplatSourceFlags
+    {
+        public const int AbsoluteValue = 1;
     }
 
     public static class EveFieldsSplatFalloffs
