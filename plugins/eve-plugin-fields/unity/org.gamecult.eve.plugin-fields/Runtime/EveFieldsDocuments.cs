@@ -74,5 +74,7 @@ namespace GameCult.Eve.PluginFields
         [Key(19)] public IReadOnlyList<double> PhaseY { get; set; } = Array.Empty<double>();
         [Key(20)] public IReadOnlyList<double> AnimationSpeed { get; set; } = Array.Empty<double>();
         [Key(21)] public IReadOnlyList<double> SourceFlags { get; set; } = Array.Empty<double>();
+        [Key(22)] public IReadOnlyList<double> FalloffScale { get; set; } = Array.Empty<double>();
+        [Key(23)] public IReadOnlyList<double> FalloffExponent { get; set; } = Array.Empty<double>();
     }
 }

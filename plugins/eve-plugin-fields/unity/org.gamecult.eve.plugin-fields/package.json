@@ -1,6 +1,6 @@
 {
   "name": "org.gamecult.eve.plugin-fields",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "displayName": "Eve Fields Plugin Contracts",
   "description": "Runtime-neutral C# contracts for gamecult.fields documents.",
   "unity": "2021.3",

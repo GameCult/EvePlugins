@@ -51,6 +51,7 @@ namespace GameCult.Eve.PluginFields
         public const int Linear = 1;
         public const int Smooth = 2;
         public const int InverseSmooth = 3;
+        public const int PowerPulse = 4;
     }
 
     public interface IEveFieldsViewport
@@ -99,6 +100,8 @@ namespace GameCult.Eve.PluginFields
         IReadOnlyList<double> PhaseY { get; }
         IReadOnlyList<double> AnimationSpeed { get; }
         IReadOnlyList<double> SourceFlags { get; }
+        IReadOnlyList<double> FalloffScale { get; }
+        IReadOnlyList<double> FalloffExponent { get; }
     }
 
     public interface IEveFieldsSplatsDocument
